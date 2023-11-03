@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
-import { getHosList, getHosList2 } from '@/api/index'
+import { getHosTow } from '@/api/index'
 
 const params = reactive({
   page: 1,
@@ -9,40 +9,19 @@ const params = reactive({
   districtCode: '110101'
 })
 
-const getData = () => {
-  getHosList(params.page, params.limit, params.hostype, params.districtCode)
-    .then((res) => {
-      //请求成功之后，根据返回的数据进行不同的处理
-      if (res.code == 200) {
-        console.log(`output->res`, res)
-      } else {
-        console.log(`output->`, res)
-      }
-    })
-    .catch((err) => {
-      //处理请求错误
-      console.log(`output->err`, err)
-    })
-}
-
-const getData2 = async () => {
+const getData = async () => {
   try {
-    const res = await getHosList2(params.page, params.limit, params.hostype, params.districtCode)
-
-    //请求成功之后，根据返回的数据进行不同的处理
-    if (res.code == 200) {
-      console.log(`output->res`, res)
-    } else {
-      console.log(`output->`, res)
-    }
+    const res = await getHosTow()
+    console.log(`output->res`, res)
   } catch (error) {
-    console.log(`output->error.message`, error.message)
+    console.log(`output->error`, error)
   }
 }
 
+getData()
+
 const getAllData = () => {
   getData()
-  getData2()
 }
 </script>
 
